@@ -1,0 +1,60 @@
+Your assignment is to expand the class LotteryNumbers, which draws the lottery numbers of the week. The numbers of the week consist of 7 different numbers between 1 and 39. The class has the following functionality:
+
+the constructor LotteryNumbers creates a new LotteryNumbers object, which contains the new drawn numbers
+the method numbers returns the drawn numbers of this draw
+the method drawNumbers draws new numbers
+the method containsNumber reveals if the number is among the drawn numbers
+The frame of the class is as follows:
+
+import java.util.ArrayList;
+import java.util.Random;
+
+public class LotteryNumbers {
+    private ArrayList<Integert> numbers;
+
+    public LotteryNumbers() {
+        // We'll format a list for the numbers
+        this.numbers = new ArrayList<Integert>();
+        // Draw numbers as LotteryNumbers is created
+        this.drawNumbers();
+    }
+
+    public ArrayList<Integert> numbers() {
+        return this.numbers;
+    }
+
+    public void drawNumbers() {
+        // Write the number drawing here using the method containsNumber()
+    }
+
+    public boolean containsNumber(int number) {
+        // Test here if the number is already among the drawn numbers
+    }
+}
+    
+The following main program comes with the template:
+
+import java.util.ArrayList;
+
+public class Program {
+    public static void main(String[] args) {
+        LotteryNumbers lotteryNumbers = new LotteryNumbers();
+        ArrayList<Integert> numbers = lotteryNumbers.numbers();
+
+        System.out.println("Lottery numbers:");
+        for (int number : numbers) {
+            System.out.print(number + " ");
+        }
+        System.out.println("");
+    }
+}
+    
+The program can print lines like these:
+
+Lottery numbers:
+3 5 10 14 15 27 37
+    
+Lottery numbers:
+2 9 11 18 23 32 34
+    
+Note! a number can be in one set of numbers only once (per draw of course).
