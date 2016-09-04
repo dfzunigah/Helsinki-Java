@@ -1,0 +1,58 @@
+In this exercise the following game is created:
+
+Guess a number: 73
+The number is lesser, guesses made: 1
+Guess a number: 22
+The number is greater, guesses made: 2
+Guess a number: 51
+The number is greater, guesses made: 3
+Guess a number: 62
+The number is greater, guesses made: 4
+Guess a number: 68
+The number is greater, guesses made: 5
+Guess a number: 71
+The number is lesser, guesses made: 6
+Guess a number: 70
+Congratulations, your guess is correct!
+    
+EXERCISE 41.1: GUESSING A NUMBER
+The program that comes with the exercise contains a command called drawNumber. It draws a number, which is in the range 0 to 100 (both 0 and 100 are possible). Create a program that draws a number. Then the user has the chance to guess once, what the number is. The program should to print "The number is lesser", "The number is greater" or "Congratulations, your guess is correct!" depending on the number the user typed.
+
+Guess a number: 12
+The number is greater
+    
+Guess a number: 66
+The number is lesser
+    
+Guess a number: 42
+Congratulations, your guess is correct!
+    
+EXERCISE 41.2: REPEATED GUESSING
+Develop your program by adding the following functionality: the guessing should be made repeatedly until the user types the right number. Note that you need to draw the number by using the drawNumber command before the repetition. Why? What happens if you draw the number inside the repetition?
+
+In the example below, the command call drawNumber returned the value 83.
+
+Guess a number: 55
+The number is greater
+Guess a number: 85
+The number is lesser
+Guess a number: 77
+The number is greater
+Guess a number: 81
+The number is greater
+Guess a number: 83
+Congratulations, your guess is correct!
+    
+EXERCISE 41.3: COUNTING THE GUESSES
+Develop your program by adding the following functionality: the program needs to include a variable of type int, which is used to count the guesses the user has made. The program should always print the number of guesses along with the answer.
+
+Guess a number: 55
+The number is greater, guesses made: 1
+Guess a number: 85
+The number is lesser, guesses made: 2
+Guess a number: 77
+The number is greater, guesses made: 3
+Guess a number: 81
+The number is greater, guesses made: 4
+Guess a number: 83
+Congratulations, your guess is correct!
