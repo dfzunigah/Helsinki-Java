@@ -1,0 +1,212 @@
+EXERCISE 86.1: THE "STUPID" LYYRA CARD
+In the last set of exercises, we implemented the class LyyraCard. The card had methods for paying economical and gourmet lunches and a method for loading money.
+
+Last week's version of the card is however somehow problematic. The card knew the lunch prices so that it could take the right price from the balance if a lunch was paid. What if the lunch prices change? Or what if it is decided that LyyraCards could also be used to purchase coffee? A change like these would mean that all the existing LyyraCards should be replaced with the new ones with the right prices and/or new methods. This does not sound good at all!
+
+A better solution is to store only the balance on the card and have all the inteligence in a cash register.
+
+We will soon program the cash register but let us start by completing the "stupid" version of the Lyyra card. The card holds the balance and has only two methods, public void loadMoney(double amount) that is already implemented and public boolean pay(double amount) that you should complete according to the instructions below:
+
+public class LyyraCard {
+    private double balance;
+
+    public LyyraCard(double balance) {
+        this.balance = balance;
+    }
+
+    public double balance() {
+        return this.balance;
+    }
+
+    public void loadMoney(double amount) {
+        this.balance += amount;
+    }
+
+    public boolean pay(double amount){
+       // the method checks if the balance of the card is at least the amount given as parameter
+       // if not, the method returns false meaning that the card could not be used for the payment
+       // if the balance is enough, the given amount is taken from the balance and true is returned
+    }
+}
+  
+With the following main:
+
+public class Main {
+    public static void main(String[] args) {
+        LyyraCard cardOfPekka = new LyyraCard(10);
+
+        System.out.println("money on the card " + cardOfPekka.balance() );
+        boolean succeeded = cardOfPekka.pay(8);
+        System.out.println("money taken: " + succeeded );
+        System.out.println("money on the card " + cardOfPekka.balance() );
+
+        succeeded = cardOfPekka.pay(4);
+        System.out.println("money taken: " + succeeded );
+        System.out.println("money on the card " + cardOfPekka.balance() );
+    }
+}
+  
+the output should be
+
+money on the card 10.0
+money taken: true
+money on the card 2.0
+money taken: false
+money on the card 2.0
+  
+EXERCISE 86.2: CASH REGISTER AND PAYING WITH CASH
+In Unicafe, a client pays either with cash or with a Lyyra Card. The personnel uses a cash register to charge the client. Let us start by implementig the part of CashRegister that takes care of cash payments.
+
+Below is the skeleton of CashRegister that also has the information on how the methods should be implemented:
+
+public class CashRegister {
+    private double cashInRegister;   // the amount of cash in the register
+    private int economicalSold;      // the amount of economical lunches sold
+    private int gourmetSold;         // the amount of gourmet lunches sold
+
+    public CashRegister() {
+        // at start the register has 1000 euros
+    }
+
+    public double payEconomical(double cashGiven) {
+        // the price of the economical lunch is 2.50 euros
+        // if the given cash is at least the price of the lunch:
+        //    the price of lunch is added to register
+        //    the amount of the sold lunches is incremented by one
+        //    the method returns cashGiven - lunch price
+        // if not enough money is given, all is returned and nothing else happens
+    }
+
+    public double payGourmet(double cashGiven) {
+        // the price of the gourmet lunch is 4.00 euros
+        // if the given cash is at least the price of the lunch:
+        //    the price of lunch is added to the register
+        //    the amount of the sold lunches is incremented by one
+        //    the method returns cashGiven - lunch price
+        // if not enough money is given, all is returned and nothing else happens
+    }
+
+    public String toString() {
+        return "money in register "+cashInRegister+" economical lunches sold: "+economicalSold+" gourmet lunches sold: "+gourmetSold;
+    }
+}
+  
+When correctly implemented, the following main:
+
+public class Main {
+    public static void main(String[] args) {
+        CashRegister unicafeExactum = new CashRegister();
+
+        double theChange = unicafeExactum.payEconomical(10);
+        System.out.println("the change was " + theChange );
+
+        theChange = unicafeExactum.payEconomical(5);
+        System.out.println("the change was "  + theChange );
+
+        theChange = unicafeExactum.payGourmet(4);
+        System.out.println("the change was "  + theChange );
+
+        System.out.println( unicafeExactum );
+    }
+}
+  
+should output:
+
+the change was 7.5
+the change was 2.5
+the change was 0.0
+money in register 1009.0 economical lunches sold: 2 gourmet lunches sold: 1
+  
+EXERCISE 86.3: PAYING WITH CARD
+Extend the cash register with methods to charge a lunch price from a Lyyra Card. See below how the methods should appear and behave:
+
+public class CashRegister {
+    // ...
+
+    public boolean payEconomical(LyyraCard card) {
+        // the price of the economical lunch is 2.50 euros
+        // if the balance of the card is at least the price of the lunch:
+        //    the amount of sold lunches is incremented by one
+        //    the method returns true
+        // if not, the method returns false
+    }
+
+    public boolean payGourmet(LyyraCard card) {
+        // the price of the gourmet lunch is 4.00 euros
+        // if the balance of the card is at least the price of the lunch:
+        //    the amount of sold lunches is incremented by one
+        //    the method returns true
+        // if not, the method returns false
+    }
+
+    // ...
+}
+  
+Note: card payments do not affect the amount of money in the register!
+
+Example main and output:
+
+public class Main {
+    public static void main(String[] args) {
+        CashRegister unicafeExactum = new CashRegister();
+
+        double theChange = unicafeExactum.payEconomical(10);
+        System.out.println("the change was " + theChange );
+
+        LyyraCard cardOfJim = new LyyraCard(7);
+
+        boolean succeeded = unicafeExactum.payGourmet(cardOfJim);
+        System.out.println("payment success: " + succeeded);
+        succeeded = unicafeExactum.payGourmet(cardOfJim);
+        System.out.println("payment success: " + succeeded);
+        succeeded = unicafeExactum.payEconomical(cardOfJim);
+        System.out.println("payment success: " + succeeded);
+
+        System.out.println( unicafeExactum );
+    }
+}
+  
+the change was 7.5
+payment success: true
+payment success: false
+payment success: true
+money in register 1002.5 economical lunches sold: 2 gourmet lunches sold: 1
+  
+EXERCISE 86.4: LOADING MONEY
+To complete the assignment, extend the cash register with a method that can be used to load cash to Lyyra Cards. When a certain amount is loaded to the card, the amount stored in the register increases correspondingly. Remember that the amount to be loaded needs to be positive! The method skeleton:
+
+public void loadMoneyToCard(LyyraCard card, double sum) {
+   // ...
+}
+  
+Example main and its output:
+
+public class Main {
+    public static void main(String[] args) {
+        CashRegister unicafeExactum = new CashRegister();
+        System.out.println( unicafeExactum );
+
+        LyyraCard cardOfJim = new LyyraCard(2);
+
+        System.out.println("the card balance " + cardOfJim.balance() + " euros");
+
+        boolean succeeded = unicafeExactum.payGourmet(cardOfJim);
+        System.out.println("payment success: " + succeeded);
+
+        unicafeExactum.loadMoneyToCard(cardOfJim, 100);
+
+        succeeded = unicafeExactum.payGourmet(cardOfJim);
+        System.out.println("payment success: " + succeeded);
+
+        System.out.println("the card balance " + cardOfJim.balance() + " euros");
+
+        System.out.println( unicafeExactum );
+    }
+}
+  
+money in register 1000.0 economical lunches sold: 0 gourmet lunches sold: 0
+money on the card 2.0 euros
+payment success: false
+payment success: true
+the card balance 98.0 euros
+money in register 1100.0 economical lunches sold: 0 gourmet lunches sold: 1
