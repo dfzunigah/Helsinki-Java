@@ -1,0 +1,121 @@
+Your Finnish friend designed a Hangman game that looks like the following:
+
+"Image"
+
+Your friend has programmed the user interface and also a skeleton for the game logic. Now, she asks you to finish the remaining pieces of the game logic.
+
+The Finnish words sana, virheitä, viesti, hävisit and arvatut (kirjaimet) translate into word, (number of) faults, message, you lost and guessed (letters) respectively.
+
+Amongst other stuff, with TMC you get the following skeleton for the class HangmanLogic
+
+public class HangmanLogic {
+
+    private String word;
+    private String guessedLetters;
+    private int numberOfFaults;
+
+    public HangmanLogic(String word) {
+        this.word = word.toUpperCase();
+        this.guessedLetters = "";
+        this.numberOfFaults = 0;
+    }
+
+    public int numberOfFaults() {
+        return this.numberOfFaults;
+    }
+
+    public String guessedLetters() {
+        return this.guessedLetters;
+    }
+
+    public int losingFaultAmount() {
+        return 12;
+    }
+
+    public void guessLetter(String letter) {
+        // program here the functionality for making a guess
+
+        // if the letter has already been guessed, nothing happens
+
+        // it the word does not contains the guessed letter, the number of faults increases
+        // the letter is added among the already guessed letters
+    }
+
+    public String hiddenWord() {
+        // program here the functionality for building the hidden word
+
+        // create the hidden word by iterating through this.word letter by letter
+        // if the letter in turn is within the guessed words, put it in the hidden word
+        // if the letter is not among the guessed ones, replace it with _ in the hidden word
+
+        // return the hidden word at the end
+
+        return "";
+    }
+}
+    
+In this assignment, you should only touch class HangmanLogic and implement the functionality of the methods guessLetter(String letter) and hiddenWord().
+
+Testing the code
+
+The TMC project includes two classes that help you with testing. The class Main starts the graphical version of the game. The class TestProgram can be used to test the class HangmanLogic.
+
+EXERCISE 83.1: GUESSING A LETTER
+Touch only the method guessLetter(String letter) in this assignment!
+
+When a user guesses a letter, the user interface calls method guessLetter which is supposed to take care of action related to guessing a letter. First, it should check if the letter has already been guessed. In that case, the method does not do anything.
+
+The method increases the number of faults (this.numberOfFaults) if the word (this.word) does not contain the guessed letter. Then the letter is added among the already guessed letters (the object variable this.guessedLetters).
+
+An example of how the method guessLetter should work:
+
+HangmanLogic l = new HangmanLogic("kissa");
+System.out.println("guessing: A, D, S, F, D");
+l.guessLetter("A");   // correct
+l.guessLetter("D");   // wrong
+l.guessLetter("S");   // correct
+l.guessLetter("F");   // wrong
+l.guessLetter("D");   // This should not have any effect on the number of faults since D was already guessed
+System.out.println("guessed letters: "+l.guessedLetters());
+System.out.println("number of faults: "+l.numberOfFaults());
+    
+guessing: A, D, S, F, D
+guessed letters: ADSF
+number of faults: 2
+    
+EXERCISE 83.2: CREATING THE HIDDEN WORD
+The Hangman user interface shows a hidden version of the word to the user. In the above figure, the hidden word is METO_I. All the letters that the user has already guessed are shown in the hidden word but the rest of the letters are replaced with underscores. In this part of the assignment, you should complete the method hiddenWord of Hangman logic that takes care of building the hidden word for the user interface.
+
+Commands while, charAt and contains might be useful here. Note that a single char can be made into a string as follows:
+
+char c = 'a';
+String aString = "" + c;
+    
+An example of how the method works:
+
+HangmanLogic l = new HangmanLogic("kissa");
+System.out.println("word is: "+l.hiddenWord());
+
+System.out.println("guessing: A, D, S, F, D");
+l.guessLetter("A");
+l.guessLetter("D");
+l.guessLetter("S");
+l.guessLetter("F");
+l.guessLetter("D");
+System.out.println("guessed letters: "+l.guessedLetters());
+System.out.println("number of faults: "+l.numberOfFaults());
+System.out.println("word now: "+l.hiddenWord());
+    
+word is: _____
+guessing: A, D, S, F, D
+guessed letters: ADSF
+number of faults: 2
+word now: __SSA
+    
+Now, you can test the game by using class Main. You can change the guessed word by changing the constructor parameter of the game logic:
+
+HangmanLogic logic = new HangmanLogic("parameter");
+HangmanUI game = new HangmanUI(logic);
+game.start();
+    
+The game is played with the keyboard. You can end the game by pressing x in the upper left corner of the game window.
