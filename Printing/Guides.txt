@@ -1,0 +1,43 @@
+EXERCISE 40.1: PRINTING STARS AND WHITESPACES
+Create a method printWhitespaces(int size) that prints the given amount of whitespaces. Them method should not print a line break.
+
+Reimplement or copy the method printStars(int size) from the previous exercise.
+
+EXERCISE 40.2: PRINTING A RIGHT-ALIGNED TRIANGLE
+Create the method printTriangle(int size) that prints a triangle using the mehtods printWhitespaces and printStars. Note: do not print anything in the method itself, just call the helper methods to do the actual printing.
+
+For example, the method call printTriangle(4) has the following output:
+
+   *
+  **
+ ***
+****
+    
+EXERCISE 40.3: PRINTING A CHRISTMAS TREE
+Create the method xmasTree(int height) that prints a Christmas tree using the mehtods printWhitespaces and printStars. A Christmas tree consists of a triangle of given height and a stand. The stand is two stars tall and three stars wide and it is located in the center of the bottom of the triangle. Note: do not print anything in the method itself, just call the helper methods to do the actual printing.
+
+The method call xmasTree(4), for example, has the following output:
+
+   *
+  ***
+ *****
+*******
+  ***
+  ***
+    
+The method call xmasTree(10) has the following output:
+
+         *
+        ***
+       *****
+      *******
+     *********
+    ***********
+   *************
+  ***************
+ *****************
+*******************
+        ***
+        ***
+    
+Second note: You don't need to worry about heights below 3!
