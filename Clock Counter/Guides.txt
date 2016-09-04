@@ -1,0 +1,209 @@
+We start by implementing a class BoundedCounter and then use counter objects to implement a clock.
+
+EXERCISE 78.1: BOUNDEDCOUNTER
+Implement class BoundedCounter with the following functionality:
+
+A counter has an object variable that remembers the value of the counter. The value is within the range 0..upperBound
+In the beginning the value is 0.
+The upper bound of the value is defined by the constructor parameter.
+The method next increments the value of the counter. If the value would be more that the upper limit, it wraps around and becomes zero.
+The method toString returns a string representation of the counter value.
+The skeleton of the class is as follows:
+
+public class BoundedCounter {
+    private int value;
+    private int upperLimit;
+
+    public BoundedCounter(int upperLimit) {
+        // write code here
+    }
+
+    public void next() {
+        // write code here
+    }
+
+    public String toString() {
+        // write code here
+    }
+}
+    
+Note: you cannot return an integer value directly from the method toString since the method should return a string. Integer variable value can be turned into a string by prefixing it with an empty string: "" + value.
+
+A main program that uses the counter:
+
+public class Main {
+    public static void main(String[] args) {
+        BoundedCounter counter = new BoundedCounter(4);
+        System.out.println("Value at start: " + counter );
+
+        int i = 0;
+        while ( i < 10) {
+            counter.next();
+            System.out.println("Value: " + counter );
+            i++;
+        }
+    }
+}
+    
+In the constructor, an upper limit of 4 is given to the new counter object. Now, the value of the counter should be within the range 0...4. Note how the method next increases the value until it hits the upper limit and becomes zero again:
+
+Value at start: 0
+Value: 1
+Value: 2
+Value: 3
+Value: 4
+Value: 0
+Value: 1
+Value: 2
+Value: 3
+Value: 4
+Value: 0
+    
+EXERCISE 78.2: PRINTING THE INITIAL ZERO
+Imrove toString so that if the value of the counter is less than 10, it prefixes the value with 0. If the value of the counter is e.g. 3, toString should produce "03". If the value is at least 10, e.g. 12, the returned string would be "12".
+
+A main program that demonstrates the desired functionality of the improved toString.
+
+public class Main {
+    public static void main(String[] args) {
+        BoundedCounter counter = new BoundedCounter(14);
+        System.out.println("Value at start: " + counter );
+
+        int i = 0;
+        while ( i < 16){
+            counter.next();
+            System.out.println("value: " + counter );
+            i++;
+        }
+    }
+}
+    
+value at start: 00
+value: 01
+value: 02
+value: 03
+value: 04
+value: 05
+value: 06
+value: 07
+value: 08
+value: 09
+value: 10
+value: 11
+value: 12
+value: 13
+value: 14
+value: 00
+value: 01
+    
+EXERCISE 78.3: THE FIRST VERSION OF THE CLOCK
+With two counter objects it possible for us to build a simple clock. Hours can be represented by a counter with upper bound 23 and minutes by a counter with upper bound 59. As we all know, when minutes wrap around from 59 to 0, hours advance by one.
+
+First you should implement the method getValue for the counters in the class:
+
+public int getValue() {
+    // write here code that returns the value
+}
+    
+Then implement the clock in your main method in the following style:
+
+public class Main {
+    public static void main(String[] args) {
+        BoundedCounter minutes = new BoundedCounter(59);
+        BoundedCounter hours = new BoundedCounter(23);
+
+        int i = 0;
+        while ( i < 121 ) {
+            System.out.println( hours + ":" + minutes);   // the current time printed
+            // advance minutes
+            // if minutes become zero, advance hours
+            i++;
+        }
+    }
+}
+    
+The output should be:
+
+00:00
+00:01
+...
+00:59
+01:00
+01:01
+01:02
+...
+01:59
+02:00
+    
+EXERCISE 78.4: THE SECOND VERSION OF THE CLOCK
+Firstly implement the method setValue to the class BoundedCounter. The method should set the value of the parameter to the counter unless the parameter is less than zero or larger than the upper bound. In those cases, the method does not have any effect.
+
+Then add a seconds counter to your clock. The clock should now be as follows:
+
+public class Main {
+    public static void main(String[] args)  {
+        Scanner reader = new Scanner(System.in);
+        BoundedCounter seconds = new BoundedCounter(59);
+        BoundedCounter minutes = new BoundedCounter(59);
+        BoundedCounter hours = new BoundedCounter(23);
+
+        System.out.print("seconds: ");
+        int s = // read the initial value of seconds from the user
+        System.out.print("minutes: ");
+        int m = // read the initial value of minutes from the user
+        System.out.print("hours: ");
+        int h = // read the initial value of hours from the user
+
+        seconds.setValue(s);
+        minutes.setValue(m);
+        hours.setValue(h);
+
+        int i = 0;
+        while ( i < 121 ) {
+            // like in previous but seconds taken into account
+
+            i++;
+        }
+
+    }
+}
+    
+Ensure that all works as expected when starting e.g. with time 23:59:50.
+
+The output should be:
+
+seconds: 50
+minutes: 59
+hours: 23
+23:59:50
+23:59:51
+23:59:52
+...
+    
+Bonus: eternal clock (exercise not assessed with TMC!)
+
+Before you start, submit the exercise for assesment.
+
+Change your main as follows:
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        BoundedCounter seconds = new BoundedCounter(59);
+        BoundedCounter minutes = new BoundedCounter(59);
+        BoundedCounter hours = new BoundedCounter(23);
+
+        seconds.setValue(50);
+        minutes.setValue(59);
+        hours.setValue(23);
+
+        while ( true ) {
+            System.out.println( hours + ":" + minutes + ":" + seconds );
+            Thread.sleep(1000);
+            // put here the logic to advance your clock by one second
+        }
+    }
+}
+    
+Now, the clock goes on forever and the value is updated as it should be, once in a second. The clock estimates the duration of a second with the command Thread.sleep(1000); The parameter in the command is the time to sleep in milliseconds. In order to use the sleep command, you should do an addition to the definition of main: public static void main(String[] args) throws Exception {
+
+You can end the eternal clock by pressing the red box in the NetBeans console (i.e. the area in NB where the output of programs gets printed).
