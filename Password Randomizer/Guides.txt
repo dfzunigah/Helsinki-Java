@@ -1,0 +1,44 @@
+Your assignment is to expand the class PasswordRandomizer that has the following functionality:
+
+The constructor PasswordRandomizer creates a new object, which uses the given password length.
+The method createPassword returns a new password, which consists of symbols a-z and is of the length given as a parameter to the constructor
+The frame of the class is as follows:
+
+import java.util.Random;
+
+public class PasswordRandomizer {
+    // Define the variables here
+
+    public PasswordRandomizer(int length) {
+        // Format the variable here
+    }
+
+    public String createPassword() {
+      // Write the code here which returns the new password
+    }
+}
+    
+In the following is a program that uses a PasswordRandomizer object:
+
+public
+class Program {
+    public static void main(String[] args) {
+        PasswordRandomizer randomizer = new PasswordRandomizer(13);
+        System.out.println("Password: " + randomizer.createPassword());
+        System.out.println("Password: " + randomizer.createPassword());
+        System.out.println("Password: " + randomizer.createPassword());
+        System.out.println("Password: " + randomizer.createPassword());
+    }
+}
+    
+The output could look something like this:
+
+Password: mcllsoompezvs
+Password: urcxboisknkme
+Password: dzaccatonjcqu
+Password: bpqmedlbqaopq
+    
+Tip 1: this is how you turn the integer number into a character:
+
+int number = 17;
+char symbol = "abcdefghijklmnopqrstuvwxyz".charAt(number);
